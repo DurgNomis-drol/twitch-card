@@ -40,15 +40,6 @@ class TwitchCard extends HTMLElement {
           height: 100%;
           margin: 0 0 0 0;
         }
-        twitch-card ul {
-          margin: 0;
-          padding: 0;
-        }
-        twitch-card li {
-          list-style-type: none;
-          margin: 0 0 0 0;
-          padding: 0 0 0 0;
-        }
         twitch-card .live {
           background: green;
           border-radius: 50%;
@@ -101,7 +92,7 @@ class TwitchCard extends HTMLElement {
           color: var(--primary-text-color);
           background-color: var(--card-background-color);
           border-radius: 0 0 var(--ha-card-border-radius) var(--ha-card-border-radius);
-          padding: 5px 0 4px 0;
+          padding: 5% 0 5% 0;
           opacity: 0.95;
         }
         @keyframes pulse {
