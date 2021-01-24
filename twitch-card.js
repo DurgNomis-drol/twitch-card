@@ -22,16 +22,22 @@ class TwitchCard extends HTMLElement {
       this.content = document.createElement('div');
       const style = document.createElement('style');
       style.textContent = `
-        twitch-card .streamer {
+        twitch-card {
           width: 100%;
           height: 100%;
           margin: 0 0 0 0;
           padding: 0 0 0 0;
-
+          position: relative;
+        }
+        twitch-card ha-card{
+          width: 100%;
+          height: 100%;
+          margin: 0 0 0 0;
+          padding: 0 0 0 0;
         }
         twitch-card img {
           width: 100%;
-          height: 20vw;
+          height: 100%;
           margin: 0 0 0 0;
         }
         twitch-card ul {
@@ -43,14 +49,11 @@ class TwitchCard extends HTMLElement {
           margin: 0 0 0 0;
           padding: 0 0 0 0;
         }
-        twitch-card .is-live {
-          border-radius: var(--ha-card-border-radius) var(--ha-card-border-radius) 0 0;
-        }
         twitch-card .live {
           background: green;
           border-radius: 50%;
-          height: 10%;
-          width: 10%;
+          height: 12%;
+          width: 12%;
           box-shadow: 0 0 0 0 rgba(0, 128, 0, 1);
           transform: scale(1);
           animation: pulse 2s infinite;
@@ -59,35 +62,47 @@ class TwitchCard extends HTMLElement {
           top: 10%;
           left: 10%;
         }
-        twitch-card .offline {
+        twitch-card .is-live {
           border-radius: var(--ha-card-border-radius) var(--ha-card-border-radius) 0 0;
+        }
+        twitch-card .offline {
+          border-radius: var(--ha-card-border-radius);
           -webkit-filter: grayscale(100%);
           opacity: 0.7;
           filter: alpha(opacity=70);
         }
         twitch-card .container {
-          position: relative;
           text-align: center;
           color: white;
+          height: 100%;
+          padding: 0;
+        }
+        twitch-card .underimage {
+          width: 100%;
+          font-size: 1.3em;
+          color: var(--primary-text-color);
+          background-color: var(--card-background-color);
+          border-radius: 0 0 var(--ha-card-border-radius) var(--ha-card-border-radius);
+          padding: 3px 0 0 0;
+        }
+        twitch-card .game {
+          width: 100%;
+          font-size: 1em;
+          color: var(--secondary-text-color);
+          background-color: var(--card-background-color);
+          border-radius: 0 0 var(--ha-card-border-radius) var(--ha-card-border-radius);
+          padding: 0 0 2px 0;
         }
         twitch-card .bottom {
           position: absolute;
           width: 100%;
-          bottom: -15px;
+          bottom: 0px;
           font-size: 1.3em;
-          color:  var(--primary-text-color);
+          color: var(--primary-text-color);
           background-color: var(--card-background-color);
           border-radius: 0 0 var(--ha-card-border-radius) var(--ha-card-border-radius);
-          padding: 2px;
-        }
-        twitch-card p {
-          padding: 2px 0 2px 0;
-          margin: 0 0 0 0;
-          font-size: 1em;
-          color:  var(--secondary-text-color);
-        }
-        twitch-card .game {
-          display: none;
+          padding: 5px 0 4px 0;
+          opacity: 0.95;
         }
         @keyframes pulse {
           0% {
@@ -122,50 +137,33 @@ class TwitchCard extends HTMLElement {
       };
     }
 
-    var is_live = "";
-    var live_dot = "";
     var picture = streamer['picture'];
 
     if (this.config.image) {
       picture = this.config.image;
     }
 
+    var tablehtml = "";
+
     if (streamer['state'] == 'streaming') {
-      is_live = "is-live"
-      live_dot = "live";
+      tablehtml += `
+          <div class="container">
+            <a target="_blank" href="https://twitch.tv/${streamer['channel']}"><img src="${picture}" class="is-live"></img></a>
+            <div class="live"></div>
+            <div class="underimage">${streamer['channel']}</div>
+            <div class="game">${streamer['game']}</div>
+          </div>
+      `;
 
     } else {
-      is_live = "offline";
+      tablehtml += `
+          <div class="container">
+            <a target="_blank" href="https://twitch.tv/${streamer['channel']}"><img src="${picture}" class="offline"></img></a>
+            <div class="bottom">${streamer['channel']}</div>
+          </div>
+      `;
     }
 
-    var tablehtml = `
-    <div class="streamer">
-    `;
-
-    tablehtml += `
-        <div class="container">
-          <a target="_blank" href="https://twitch.tv/${streamer['channel']}"><img src="${picture}" class="${is_live}"></img></a>
-          <div class="${live_dot}"></div>
-          <div class="bottom">${streamer['channel']}</div>
-        </div>
-    `;
-
-    /*
-    if (streamer['state'] == 'streaming') {
-      var trimmedTitle = streamer['title'].substring(0, 40);
-      trimmedTitle += "...";
-      tablehtml += `
-        <div>
-          <ul>
-            <li class="title">${streamer['game']}</li>
-          </ul>
-        </div>
-      `;
-    }*/
-
-    tablehtml += `
-    </div>
-    `;
 
     this.content.innerHTML = tablehtml;
   }
