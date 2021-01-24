@@ -5,8 +5,9 @@ Download and install as any other card in Homeassistant.
 
 Card config:
 
-> type: 'custom:twitch-card'
-
-> entity: sensor.mizkif
+```yaml
+type: 'custom:twitch-card'
+entity: sensor.mizkif
+```
 
 ![Example](/example.jpg)
