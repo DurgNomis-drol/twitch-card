@@ -123,7 +123,6 @@ class TwitchCard extends HTMLElement {
     }
 
     var is_live = "";
-    var hide_game = "game";
     var live_dot = "";
     var picture = streamer['picture'];
 
@@ -137,7 +136,6 @@ class TwitchCard extends HTMLElement {
 
     } else {
       is_live = "offline";
-      hide_game = "game";
     }
 
     var tablehtml = `
@@ -148,7 +146,7 @@ class TwitchCard extends HTMLElement {
         <div class="container">
           <a target="_blank" href="https://twitch.tv/${streamer['channel']}"><img src="${picture}" class="${is_live}"></img></a>
           <div class="${live_dot}"></div>
-          <div class="bottom">${streamer['channel']}</br><p class="${hide_game}">${streamer['game']}</p></div>
+          <div class="bottom">${streamer['channel']}</div>
         </div>
     `;
 
