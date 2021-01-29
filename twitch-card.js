@@ -140,10 +140,10 @@ class TwitchCard extends HTMLElement {
       picture = this.config.image;
     }
 
-    var tablehtml = "";
+    var html = "";
 
     if (streamer['state'] == 'streaming') {
-      tablehtml += `
+      html += `
           <div class="container">
             <a target="_blank" href="https://twitch.tv/${streamer['channel']}"><img src="${picture}" class="is-live"></img></a>
             <div class="live"></div>
@@ -153,7 +153,7 @@ class TwitchCard extends HTMLElement {
       `;
 
     } else {
-      tablehtml += `
+      html += `
           <div class="container">
             <a target="_blank" href="https://twitch.tv/${streamer['channel']}"><img src="${picture}" class="offline"></img></a>
             <div class="bottom">${streamer['channel']}</div>
@@ -162,7 +162,7 @@ class TwitchCard extends HTMLElement {
     }
 
 
-    this.content.innerHTML = tablehtml;
+    this.content.innerHTML = html;
   }
 
   setConfig(config) {
