@@ -70,11 +70,13 @@ class TwitchCard extends HTMLElement {
         }
         twitch-card .underimage {
           width: 100%;
-          font-size: 1.3em;
+          font-size: 1.2em;
           color: var(--primary-text-color);
           background-color: var(--card-background-color);
           border-radius: 0 0 var(--ha-card-border-radius) var(--ha-card-border-radius);
-          padding: 3px 0 0 0;
+          padding: 0 0 0 0;
+          word-break: break-all;
+          hyphens: auto;
         }
         twitch-card .game {
           width: 100%;
@@ -83,17 +85,21 @@ class TwitchCard extends HTMLElement {
           background-color: var(--card-background-color);
           border-radius: 0 0 var(--ha-card-border-radius) var(--ha-card-border-radius);
           padding: 0 0 2px 0;
+          word-break: break-all;
+          hyphens: auto;
         }
         twitch-card .bottom {
           position: absolute;
           width: 100%;
           bottom: 0px;
-          font-size: 1.3em;
+          font-size: 1.2em;
           color: var(--primary-text-color);
           background-color: var(--card-background-color);
           border-radius: 0 0 var(--ha-card-border-radius) var(--ha-card-border-radius);
           padding: 5% 0 5% 0;
           opacity: 0.95;
+          word-break: break-all;
+          hyphens: auto;
         }
         @keyframes pulse {
           0% {
